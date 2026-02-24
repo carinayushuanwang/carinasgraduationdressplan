@@ -288,7 +288,7 @@ section{ scroll-margin-top: calc(var(--nav-h) + 16px); }
 }
 
 .dress-link{
-  color: #D9A3B1;
+  color: #FFFFFF;
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -298,7 +298,7 @@ section{ scroll-margin-top: calc(var(--nav-h) + 16px); }
 }
 
 .dress-link:visited{
-  color: #D9A3B1;
+  color: #FFFFFF;
 }
 
 /* Donate */
