@@ -287,6 +287,20 @@ section{ scroll-margin-top: calc(var(--nav-h) + 16px); }
   text-align: center;
 }
 
+.dress-link{
+  color: #D9A3B1;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.dress-link:hover{
+  opacity: 0.9;
+}
+
+.dress-link:visited{
+  color: #D9A3B1;
+}
+
 /* Donate */
 .donate-hero{
   display: flex;
