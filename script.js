@@ -53,5 +53,55 @@ function setupZelleCopy() {
   });
 }
 
+function setupActiveNav() {
+  const navLinks = Array.from(document.querySelectorAll(".topnav__link"));
+  const sections = navLinks
+    .map((a) => document.querySelector(a.getAttribute("href")))
+    .filter(Boolean);
+
+  if (navLinks.length === 0 || sections.length === 0) return;
+
+  function setActiveById(id) {
+    navLinks.forEach((a) => {
+      const isActive = a.getAttribute("href") === `#${id}`;
+      a.classList.toggle("topnav__link--active", isActive);
+      if (isActive) a.setAttribute("aria-current", "page");
+      else a.removeAttribute("aria-current");
+    });
+  }
+
+  navLinks.forEach((a) => {
+    a.addEventListener("click", () => {
+      const id = a.getAttribute("href").slice(1);
+      setActiveById(id);
+    });
+  });
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const visible = entries
+        .filter((e) => e.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if (visible) setActiveById(visible.target.id);
+    },
+    {
+      root: null,
+      rootMargin: "-40% 0px -55% 0px",
+      threshold: [0.1, 0.25, 0.4, 0.6]
+    }
+  );
+
+  sections.forEach((sec) => observer.observe(sec));
+
+  // Initialize to whatever is currently visible on load
+  const initial = sections.find((sec) => {
+    const r = sec.getBoundingClientRect();
+    return r.top < window.innerHeight * 0.45 && r.bottom > window.innerHeight * 0.45;
+  });
+  setActiveById((initial || sections[0]).id);
+}
+
 loadProgress().catch(console.error);
 setupZelleCopy();
+setupActiveNav();
