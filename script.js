@@ -29,19 +29,6 @@ async function loadProgress() {
   });
 }
 
-function setupZelleCopy() {
-  const btn = document.getElementById("copy-zelle");
-  const note = document.getElementById("zelle-note");
-  const text = document.getElementById("zelle-text");
-
-  if (!btn || !note || !text) return;
-
-  btn.addEventListener("click", async () => {
-    const value = text.textContent.trim();
-    if (!value || value === "YOUR ZELLE EMAIL OR PHONE") {
-      alert("Add your Zelle email or phone in index.html first.");
-      return;
-    }
 
     try {
       await navigator.clipboard.writeText(value);
@@ -103,5 +90,4 @@ function setupActiveNav() {
 }
 
 loadProgress().catch(console.error);
-setupZelleCopy();
 setupActiveNav();
