@@ -1,7 +1,8 @@
 async function loadProgress() {
-  const res = await fetch("data.json", { cache: "no-store" });
+  const res = await fetch(`data.json?v=${Date.now()}`, { cache: "no-store" });
   if (!res.ok) throw new Error("Could not load data.json");
   const data = await res.json();
+  console.log("Loaded donation data:", data);
 
   const goal = Number(data.goal ?? 0);
   const raised = Number(data.raised ?? 0);
