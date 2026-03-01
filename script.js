@@ -78,6 +78,7 @@ function setupActiveNav() {
     const r = sec.getBoundingClientRect();
     return r.top < window.innerHeight * 0.45 && r.bottom > window.innerHeight * 0.45;
   });
+
   setActiveById((initial || sections[0]).id);
 }
 
