@@ -1,3 +1,4 @@
+console.log("script.js loaded");
 async function loadProgress() {
   const res = await fetch(`data.json?v=${Date.now()}`, { cache: "no-store" });
   if (!res.ok) throw new Error("Could not load data.json");
