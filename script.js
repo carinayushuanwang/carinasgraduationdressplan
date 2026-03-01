@@ -1,7 +1,9 @@
 console.log("script.js loaded");
+
 async function loadProgress() {
   const res = await fetch(`data.json?v=${Date.now()}`, { cache: "no-store" });
   if (!res.ok) throw new Error("Could not load data.json");
+
   const data = await res.json();
   console.log("Loaded donation data:", data);
 
@@ -27,17 +29,6 @@ async function loadProgress() {
     if (bar) {
       bar.setAttribute("aria-valuemax", String(goal));
       bar.setAttribute("aria-valuenow", String(raised));
-    }
-  });
-}
-
-
-    try {
-      await navigator.clipboard.writeText(value);
-      note.classList.remove("micro-text--hidden");
-      setTimeout(() => note.classList.add("micro-text--hidden"), 2200);
-    } catch {
-      alert("Copy failed. You can manually select and copy the Zelle recipient text.");
     }
   });
 }
@@ -83,7 +74,6 @@ function setupActiveNav() {
 
   sections.forEach((sec) => observer.observe(sec));
 
-  // Initialize to whatever is currently visible on load
   const initial = sections.find((sec) => {
     const r = sec.getBoundingClientRect();
     return r.top < window.innerHeight * 0.45 && r.bottom > window.innerHeight * 0.45;
@@ -91,5 +81,5 @@ function setupActiveNav() {
   setActiveById((initial || sections[0]).id);
 }
 
-loadProgress().catch(console.error);
+loadProgress().catch((err) => console.error(err));
 setupActiveNav();
